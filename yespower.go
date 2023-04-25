@@ -103,10 +103,12 @@ func newPwxformCtx(version string) (ctx *PwxformCtx) {
 }
 
 func Yespower(in []byte, N, r int, persToken string) string {
+	fmt.Printf("Input inside Yespower: %x\n", input)
 	return yespower(YESPOWER_1_0, in, N, r, persToken)
 }
 
 func Yescrypt(in []byte, N, r int, persToken string) string {
+	fmt.Printf("Input inside Yescrypt: %x\n", input)
 	return yespower(YESPOWER_0_5, in, N, r, persToken)
 }
 
@@ -517,6 +519,7 @@ func salsaXOR(in, out []uint32, rounds int) {
 }
 
 func YespowerHash(input []byte) []byte {
+	fmt.Printf("Input inside YespowerHash: %x\n", input)
 	timeBytes := input[68:72]
 	time := binary.LittleEndian.Uint32(timeBytes)
 
