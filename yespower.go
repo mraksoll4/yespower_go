@@ -103,12 +103,12 @@ func newPwxformCtx(version string) (ctx *PwxformCtx) {
 }
 
 func Yespower(in []byte, N, r int, persToken string) string {
-	fmt.Printf("Input inside Yespower: %x\n", input)
+	fmt.Printf("Input inside Yespower: %x\n", in)
 	return yespower(YESPOWER_1_0, in, N, r, persToken)
 }
 
 func Yescrypt(in []byte, N, r int, persToken string) string {
-	fmt.Printf("Input inside Yescrypt: %x\n", input)
+	fmt.Printf("Input inside Yescrypt: %x\n", in)
 	return yespower(YESPOWER_0_5, in, N, r, persToken)
 }
 
