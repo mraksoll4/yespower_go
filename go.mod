@@ -1,4 +1,4 @@
-module github/yespower-go
+module github.com/mraksoll4/yespower_go
 
 go 1.20
 
