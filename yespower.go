@@ -525,10 +525,11 @@ func YespowerHash(input []byte) []byte {
 
 	var result []byte
 	if time > 1676761800 {
-		resultHex := Yescrypt(input, 4096, 16, "Client Key")
+		resultHex := Yescrypt(input[:80], 4096, 16, "Client Key")
 		result, _ = hex.DecodeString(resultHex)
 	} else {
-		resultHex := Yespower(input, 2048, 32, "")
+		// Use 80 as the message length
+		resultHex := Yespower(input[:80], 2048, 32, "")
 		result, _ = hex.DecodeString(resultHex)
 	}
 
