@@ -523,18 +523,14 @@ func YespowerHash(input []byte) []byte {
 	timeBytes := input[68:72]
 	time := binary.LittleEndian.Uint32(timeBytes)
 
-	var result string
+	var result []byte
 	if time > 1676761800 {
-		result = Yescrypt(input, 4096, 16, "Client Key")
+		resultHex := Yescrypt(input, 4096, 16, "Client Key")
+		result, _ = hex.DecodeString(resultHex)
 	} else {
-		result = Yespower(input, 2048, 32, "")
+		resultHex := Yespower(input, 2048, 32, "")
+		result, _ = hex.DecodeString(resultHex)
 	}
 
-	hashBytes, err := hex.DecodeString(result)
-	if err != nil {
-		fmt.Printf("Error decoding hex string: %s\n", err)
-		return nil
-	}
-
-	return hashBytes
+	return result
 }
