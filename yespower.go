@@ -527,6 +527,11 @@ func YespowerHash(input []byte) []byte {
 		result = Yespower(input, 2048, 32, "")
 	}
 
-	hashBytes, _ := hex.DecodeString(result)
+	hashBytes, err := hex.DecodeString(result)
+	if err != nil {
+		fmt.Printf("Error decoding hex string: %s\n", err)
+		return nil
+	}
+
 	return hashBytes
 }
