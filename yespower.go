@@ -103,12 +103,12 @@ func newPwxformCtx(version string) (ctx *PwxformCtx) {
 }
 
 func Yespower(in []byte, N, r int, persToken string) string {
-	fmt.Printf("Input inside Yespower: %x\n", in)
+//	fmt.Printf("Input inside Yespower: %x\n", in)
 	return yespower(YESPOWER_1_0, in, N, r, persToken)
 }
 
 func Yescrypt(in []byte, N, r int, persToken string) string {
-	fmt.Printf("Input inside Yescrypt: %x\n", in)
+//	fmt.Printf("Input inside Yescrypt: %x\n", in)
 	return yespower(YESPOWER_0_5, in, N, r, persToken)
 }
 
@@ -193,8 +193,8 @@ func yespower(version string, in []byte, N, r int, persToken string) string {
 }
 
 func smix(B []uint32, r, N int, V, X []uint32, ctx *PwxformCtx) {
-	nloop_all := (N + 2) / 3
-	nloop_rw := nloop_all
+	var nloop_all uint32 = uint32((N + 2) / 3)
+	var nloop_rw uint32 = nloop_all
 
 	// Round up to even
 	nloop_all++
@@ -217,8 +217,8 @@ func smix(B []uint32, r, N int, V, X []uint32, ctx *PwxformCtx) {
 	smix1(B, 1, ctx.sBytes/128, ctx.S, X, ctx, true)
 	smix1(B, r, N, V, X, ctx, false)
 
-	smix2(B, r, N, nloop_rw, V, X, ctx)
-	smix2(B, r, N, nloop_all-nloop_rw, V, X, ctx)
+	smix2(B, r, N, int(nloop_rw), V, X, ctx)
+	smix2(B, r, N, int(nloop_all-nloop_rw), V, X, ctx)
 }
 
 func smix1(B []uint32, r, N int, V, X []uint32, ctx *PwxformCtx, init bool) {
@@ -519,7 +519,7 @@ func salsaXOR(in, out []uint32, rounds int) {
 }
 
 func YespowerHash(input []byte) []byte {
-	fmt.Printf("Input inside YespowerHash: %x\n", input)
+//	fmt.Printf("Input inside YespowerHash: %x\n", input)
 	timeBytes := input[68:72]
 	time := binary.LittleEndian.Uint32(timeBytes)
 
